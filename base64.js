@@ -27,7 +27,7 @@ base64.btoa = window.btoa || function (input) {
     block = block << 8 | charCode;
   }
   return output;
-});
+};
 
 // decoder
 // [https://gist.github.com/1020396] by [https://github.com/atk]
@@ -51,6 +51,6 @@ base64.atob = window.atob || function (input) {
     buffer = chars.indexOf(buffer);
   }
   return output;
-});
+};
 
 module.exports = base64;
