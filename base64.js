@@ -9,7 +9,7 @@ InvalidCharacterError.prototype.name = 'InvalidCharacterError';
 
 // encoder
 // [https://gist.github.com/999166] by [https://github.com/nignag]
-this.btoa || (
+window.btoa || (
 base64.btoa = function (input) {
   for (
     // initialize result and counter
@@ -32,7 +32,7 @@ base64.btoa = function (input) {
 
 // decoder
 // [https://gist.github.com/1020396] by [https://github.com/atk]
-this.atob || (
+window.atob || (
 base64.atob = function (input) {
   input = input.replace(/=+$/, '')
   if (input.length % 4 == 1) {
