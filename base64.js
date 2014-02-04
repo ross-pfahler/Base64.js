@@ -9,8 +9,7 @@ InvalidCharacterError.prototype.name = 'InvalidCharacterError';
 
 // encoder
 // [https://gist.github.com/999166] by [https://github.com/nignag]
-window.btoa || (
-base64.btoa = function (input) {
+base64.btoa = window.btoa || function (input) {
   for (
     // initialize result and counter
     var block, charCode, idx = 0, map = chars, output = '';
@@ -32,8 +31,7 @@ base64.btoa = function (input) {
 
 // decoder
 // [https://gist.github.com/1020396] by [https://github.com/atk]
-window.atob || (
-base64.atob = function (input) {
+base64.atob = window.atob || function (input) {
   input = input.replace(/=+$/, '')
   if (input.length % 4 == 1) {
     throw new InvalidCharacterError("'atob' failed: The string to be decoded is not correctly encoded.");
