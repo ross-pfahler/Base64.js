@@ -53,4 +53,19 @@ base64.atob = window.atob ? function(input) { return window.atob(input); } : fun
   return output;
 };
 
+base64.url = {
+  btoa: function(input) {
+    var output = base64.btoa(input);
+    output = output.replace(/\+/g, '-');
+    output = output.replace(/\//g, '_');
+    return output;
+  },
+  atob: function(input) {
+    var output = input;
+    output = output.replace(/-/g, '+');
+    output = output.replace(/_/g, '/');
+    return base64.atob(output);
+  }
+};
+
 module.exports = base64;

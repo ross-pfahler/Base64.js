@@ -1,6 +1,6 @@
 assert = require 'assert'
 
-{btoa, atob} = require '../base64'
+{btoa, atob, url} = require '../base64'
 
 
 describe 'Base64.js', ->
@@ -21,6 +21,8 @@ describe 'Base64.js', ->
     assert.strictEqual btoa('YZ[\\]^_`abc'), 'WVpbXF1eX2BhYmM='
     assert.strictEqual btoa('defghijklmnop'), 'ZGVmZ2hpamtsbW5vcA=='
     assert.strictEqual btoa('qrstuvwxyz{|}~'), 'cXJzdHV2d3h5ent8fX4='
+    assert.strictEqual btoa('http://lfrequiresidenotes.tumblr.com/post/87317563491/bacon?lfmin=1'), 'aHR0cDovL2xmcmVxdWlyZXNpZGVub3Rlcy50dW1ibHIuY29tL3Bvc3QvODczMTc1NjM0OTEvYmFjb24/bGZtaW49MQ=='
+    assert.strictEqual url.btoa('http://lfrequiresidenotes.tumblr.com/post/87317563491/bacon?lfmin=1'), 'aHR0cDovL2xmcmVxdWlyZXNpZGVub3Rlcy50dW1ibHIuY29tL3Bvc3QvODczMTc1NjM0OTEvYmFjb24_bGZtaW49MQ=='
 
   it 'cannot encode non-ASCII input', ->
     assert.throws (-> btoa '✈'), (err) ->
@@ -44,6 +46,7 @@ describe 'Base64.js', ->
     assert.strictEqual atob('WVpbXF1eX2BhYmM='), 'YZ[\\]^_`abc'
     assert.strictEqual atob('ZGVmZ2hpamtsbW5vcA=='), 'defghijklmnop'
     assert.strictEqual atob('cXJzdHV2d3h5ent8fX4='), 'qrstuvwxyz{|}~'
+    assert.strictEqual url.atob('aHR0cDovL2xmcmVxdWlyZXNpZGVub3Rlcy50dW1ibHIuY29tL3Bvc3QvODczMTc1NjM0OTEvYmFjb24_bGZtaW49MQ=='), 'http://lfrequiresidenotes.tumblr.com/post/87317563491/bacon?lfmin=1'
 
   it 'cannot decode invalid input', ->
     assert.throws (-> atob 'a'), (err) ->
